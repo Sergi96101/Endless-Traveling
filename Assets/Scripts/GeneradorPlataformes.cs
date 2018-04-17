@@ -1,12 +1,17 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class GeneradorPlataformes : MonoBehaviour {
 
+feature/generadorescenari
     private enum mapa { Prat, Planeta };
     const int numPlataformes = 4;
     private mapa cas;
+
+    const int numPlataformes = 4;
+    private mapa cas = mapa.prat;
+master
 
     public GameObject[] plataformesGenerades;
     public Transform puntGeneracio;
