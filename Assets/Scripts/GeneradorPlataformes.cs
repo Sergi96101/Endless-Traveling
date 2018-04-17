@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class GeneradorPlataformes : MonoBehaviour {
 
-    /*const int numPlataformes = 4;
-    private mapa cas = mapa.prat;*/
+    const int numPlataformes = 4;
+    private mapa cas = mapa.prat;
 
     public GameObject[] plataformesGenerades;
     public Transform puntGeneracio;
