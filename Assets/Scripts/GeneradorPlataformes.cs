@@ -4,8 +4,9 @@ using UnityEngine;
 
 public class GeneradorPlataformes : MonoBehaviour {
 
+    private enum mapa { Prat, Planeta };
     const int numPlataformes = 4;
-    private mapa cas = mapa.prat;
+    private mapa cas;
 
     public GameObject[] plataformesGenerades;
     public Transform puntGeneracio;
@@ -15,7 +16,7 @@ public class GeneradorPlataformes : MonoBehaviour {
     public ObjectPooler[] objectPoolPlaneta;
 
     private GameObject newPlatform;
-    private enum mapa {prat = 1, planeta = 2, jetpack = 3};
+    
 
     private float[] anchurasPlataformas;
     private float distanciaEntrePlataformes;
@@ -59,21 +60,25 @@ public class GeneradorPlataformes : MonoBehaviour {
                 heightChange = minHeight;
             }
 
-            int j = (int)mapa.planeta;
+            cas = (mapa)Random.Range(0,2);
+
+            Debug.Log(cas);
 
             switch (cas) 
             {
-                case mapa.prat: 
+                case mapa.Prat: 
                 {
-                    GameObject newPlatform = objectPoolPrat[selectorPlataforma].GetPooledObject();
+                    newPlatform = objectPoolPrat[selectorPlataforma].GetPooledObject();
                     break;
                 }
-                case mapa.planeta:
+                case mapa.Planeta:
                 {
-                    GameObject newPlatform = objectPoolPlaneta[selectorPlataforma].GetPooledObject();
+                    newPlatform = objectPoolPlaneta[selectorPlataforma].GetPooledObject();
                     break;
                 }
             }
+
+            Debug.Log(newPlatform);
 
             transform.position = new Vector3(transform.position.x + (anchurasPlataformas[selectorPlataforma] / 2) + distanciaEntrePlataformes, heightChange, transform.position.z);
 
