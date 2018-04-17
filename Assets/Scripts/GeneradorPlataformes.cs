@@ -12,12 +12,11 @@ public class GeneradorPlataformes : MonoBehaviour {
     public Transform puntGeneracio;
     public float distanciaEntrePlataformesMin;
     public float distanciaEntrePlataformesMax;
-    public ObjectPooler[] objectPoolPrat;
-    public ObjectPooler[] objectPoolPlaneta;
+    public ObjectPooler[] poolPlataformesPrat;
+    public ObjectPooler[] poolPlataformesPlaneta;
 
     private GameObject newPlatform;
     
-
     private float[] anchurasPlataformas;
     private float distanciaEntrePlataformes;
     private int selectorPlataforma;
@@ -34,7 +33,7 @@ public class GeneradorPlataformes : MonoBehaviour {
 
         for (int i = 0; i < numPlataformes; ++i)
         {
-            anchurasPlataformas[i] = objectPoolPrat[i].pooledObject.GetComponent<BoxCollider2D>().size.x;
+            anchurasPlataformas[i] = poolPlataformesPrat[i].pooledObject.GetComponent<BoxCollider2D>().size.x;
         }
 
         minHeight = transform.position.y;
@@ -62,23 +61,19 @@ public class GeneradorPlataformes : MonoBehaviour {
 
             cas = (mapa)Random.Range(0,2);
 
-            Debug.Log(cas);
-
             switch (cas) 
             {
                 case mapa.Prat: 
                 {
-                    newPlatform = objectPoolPrat[selectorPlataforma].GetPooledObject();
+                    newPlatform = poolPlataformesPrat[selectorPlataforma].GetPooledObject();
                     break;
                 }
                 case mapa.Planeta:
                 {
-                    newPlatform = objectPoolPlaneta[selectorPlataforma].GetPooledObject();
+                    newPlatform = poolPlataformesPlaneta[selectorPlataforma].GetPooledObject();
                     break;
                 }
             }
-
-            Debug.Log(newPlatform);
 
             transform.position = new Vector3(transform.position.x + (anchurasPlataformas[selectorPlataforma] / 2) + distanciaEntrePlataformes, heightChange, transform.position.z);
 
