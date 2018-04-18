@@ -1,22 +1,27 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class GeneradorPlataformes : MonoBehaviour {
 
+feature/generadorescenari
+    private enum mapa { Prat, Planeta };
+    const int numPlataformes = 4;
+    private mapa cas;
+
     const int numPlataformes = 4;
     private mapa cas = mapa.prat;
+master
 
     public GameObject[] plataformesGenerades;
     public Transform puntGeneracio;
     public float distanciaEntrePlataformesMin;
     public float distanciaEntrePlataformesMax;
-    public ObjectPooler[] objectPoolPrat;
-    public ObjectPooler[] objectPoolPlaneta;
+    public ObjectPooler[] poolPlataformesPrat;
+    public ObjectPooler[] poolPlataformesPlaneta;
 
     private GameObject newPlatform;
-    private enum mapa {prat = 1, planeta = 2, jetpack = 3};
-
+    
     private float[] anchurasPlataformas;
     private float distanciaEntrePlataformes;
     private int selectorPlataforma;
@@ -33,7 +38,7 @@ public class GeneradorPlataformes : MonoBehaviour {
 
         for (int i = 0; i < numPlataformes; ++i)
         {
-            anchurasPlataformas[i] = objectPoolPrat[i].pooledObject.GetComponent<BoxCollider2D>().size.x;
+            anchurasPlataformas[i] = poolPlataformesPrat[i].pooledObject.GetComponent<BoxCollider2D>().size.x;
         }
 
         minHeight = transform.position.y;
@@ -59,18 +64,18 @@ public class GeneradorPlataformes : MonoBehaviour {
                 heightChange = minHeight;
             }
 
-            int j = (int)mapa.planeta;
+            cas = (mapa)Random.Range(0,2);
 
             switch (cas) 
             {
-                case mapa.prat: 
+                case mapa.Prat: 
                 {
-                    GameObject newPlatform = objectPoolPrat[selectorPlataforma].GetPooledObject();
+                    newPlatform = poolPlataformesPrat[selectorPlataforma].GetPooledObject();
                     break;
                 }
-                case mapa.planeta:
+                case mapa.Planeta:
                 {
-                    GameObject newPlatform = objectPoolPlaneta[selectorPlataforma].GetPooledObject();
+                    newPlatform = poolPlataformesPlaneta[selectorPlataforma].GetPooledObject();
                     break;
                 }
             }
