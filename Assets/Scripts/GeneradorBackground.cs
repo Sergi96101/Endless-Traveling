@@ -51,6 +51,11 @@ public class GeneradorBackground : MonoBehaviour {
                     }
             }
 
+            if (contMapa == 0)
+            {
+                cas = (mapa)Random.Range(0, 2);
+            }
+
             transform.position = new Vector3(transform.position.x + anchoFondo / 2, transform.position.y, transform.position.z);
 
             newFons.transform.position = transform.position;
