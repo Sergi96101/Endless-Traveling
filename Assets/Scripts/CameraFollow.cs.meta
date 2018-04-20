@@ -1,12 +1,9 @@
 fileFormatVersion: 2
-guid: 11968395520338f428a193346aebdd42
-<<<<<<< HEAD
-timeCreated: 1523986738
-=======
-timeCreated: 1523989065
->>>>>>> player_features
+guid: fe2c9067a2ed25944bab4ed6ccc06785
+timeCreated: 1521221864
 licenseType: Free
 MonoImporter:
+  externalObjects: {}
   serializedVersion: 2
   defaultReferences: []
   executionOrder: 0
