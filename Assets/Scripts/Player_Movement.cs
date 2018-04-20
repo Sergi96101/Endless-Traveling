@@ -6,7 +6,6 @@ public class Player_Movement : MonoBehaviour
 {
     public bool bouncingActive;
     public bool jetpackActive;
-	public bool boundActive;
     //velocitat i força de salt del pers.
     public float speed;
     public float force;
