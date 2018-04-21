@@ -12,14 +12,13 @@ public class GeneradorBackground : MonoBehaviour {
     private mapa cas;
 
     private int contMapa;
-    private int contZonaCanvi;
+    private
 
     // Use this for initialization
     void Start () {
         anchoFondo = poolFons[1].pooledObject.GetComponent<SpriteRenderer>().size.x;
         cas = mapa.Prat;
         contMapa = 1;
-        contZonaCanvi = 1;
     }
 	
 	// Update is called once per frame
@@ -48,12 +47,11 @@ public class GeneradorBackground : MonoBehaviour {
                     {
                         newFons = poolFons[2].GetPooledObject();
                         contMapa = 0;
-                        ++contZonaCanvi;
                         break;
                     }
             }
 
-            if (contMapa == 0 && contZonaCanvi == 3)
+            if (contMapa == 0)
             {
                 cas = (mapa)Random.Range(0, 2);
             }
