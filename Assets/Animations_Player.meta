@@ -1,5 +1,6 @@
 fileFormatVersion: 2
 <<<<<<< HEAD
+<<<<<<< HEAD
 guid: 07f1dc8bdfe251e4c9463fe46a5c5749
 folderAsset: yes
 timeCreated: 1524230821
@@ -8,6 +9,11 @@ guid: 0b5475c16ecb38346889ecc39ac789f8
 folderAsset: yes
 timeCreated: 1524240533
 >>>>>>> develop
+=======
+guid: 07f1dc8bdfe251e4c9463fe46a5c5749
+folderAsset: yes
+timeCreated: 1524230821
+>>>>>>> player_features
 licenseType: Free
 DefaultImporter:
   userData: 
