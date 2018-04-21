@@ -1,0 +1,21 @@
+fileFormatVersion: 2
+<<<<<<< Updated upstream
+guid: 11968395520338f428a193346aebdd42
+<<<<<<< HEAD
+timeCreated: 1523986738
+=======
+timeCreated: 1523989065
+>>>>>>> player_features
+=======
+guid: fbd4c7e2763c3c443aa3a9c434a32c2e
+timeCreated: 1524339463
+>>>>>>> Stashed changes
+licenseType: Free
+MonoImporter:
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
