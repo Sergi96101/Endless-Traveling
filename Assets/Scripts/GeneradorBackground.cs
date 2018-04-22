@@ -53,10 +53,10 @@ public class GeneradorBackground : MonoBehaviour {
                 }
                 case mapa.Canvi:
                 {
-                    if (contCanvi == 1)
+                    if (contCanvi == 2)
                     {
                         triggerCanviSalt = Instantiate(triggerCanviSalt);
-                        triggerCanviSalt.transform.position = transform.position;
+						triggerCanviSalt.transform.position = new Vector3 (transform.position.x + anchoFondo, transform.position.y, transform.position.z);
                     }
                     newFons = poolFons[3].GetPooledObject();
                     contMapa = 0;
@@ -65,7 +65,7 @@ public class GeneradorBackground : MonoBehaviour {
                 }
             }
 
-            if (contMapa == 0 && contCanvi == 3)
+            if (contMapa == 0 && contCanvi > 3)
             {
                 cas = (mapa)Random.Range(0, 3);
                 contCanvi = 0;

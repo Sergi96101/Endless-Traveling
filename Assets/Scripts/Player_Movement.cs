@@ -7,7 +7,6 @@ public class Player_Movement : MonoBehaviour
 {
     public bool bouncingActive;
     public bool jetpackActive;
-	public bool boundActive;
     //velocitat i força de salt del pers.
     public float speed;
     public float force;
@@ -33,6 +32,8 @@ public class Player_Movement : MonoBehaviour
 
     private Animator myAnim;
 
+	public bool changeM;
+
     // Use this for initialization
     void Start()
     {
@@ -45,6 +46,8 @@ public class Player_Movement : MonoBehaviour
         speedDistCount = speedIncrease;
 
 		noJump = true;
+
+		changeM = false;
     }
 
     // Update is called once per frame
@@ -148,6 +151,14 @@ public class Player_Movement : MonoBehaviour
 		if (other.gameObject.tag == "killPlayer") {
 			Application.LoadLevel (Application.loadedLevel);
 		}
+	}
+
+	void OnTriggerEnter2D (Collider2D other){
+		if (other.gameObject.tag == "changeMovement") {
+			changeM = true;
+			Debug.Log("touch");
+		}
+		
 	}
 
 }
