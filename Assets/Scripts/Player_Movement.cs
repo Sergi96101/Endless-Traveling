@@ -126,23 +126,15 @@ public class Player_Movement : MonoBehaviour
 			if (Input.GetKeyDown(KeyCode.Space) || Input.GetMouseButtonDown(0))
 			{
 				//detctar si toca terra per no fer salts infinits
-<<<<<<< HEAD
 				if (!Isground)
 				{
-					myRigid.velocity = new Vector2(myRigid.velocity.x, myRigid.velocity.y * 0.5f);
-					jumpTimeCount = jumpTime;
-					noJump = false;
+					myRigid.velocity = new Vector2 (myRigid.velocity.x, myRigid.velocity.y * 0.5f);
 				}
-=======
-				myRigid.velocity = new Vector2(myRigid.velocity.x, myRigid.velocity.y - force);
->>>>>>> develop
+
 			}
             //planejar 
             //salt llarg
         }
-
-        /* if (Input.GetMouseButtonDown(0))
-             Debug.Log("click");*/
 
         myAnim.SetFloat("Speed", myRigid.velocity.x);
         myAnim.SetBool("Is_Ground", Isground);
@@ -157,7 +149,6 @@ public class Player_Movement : MonoBehaviour
 	void OnTriggerEnter2D (Collider2D other){
 		if (other.gameObject.tag == "changeMovement") {
 			changeM = true;
-			Debug.Log("touch");
 		}
 		
 	}
