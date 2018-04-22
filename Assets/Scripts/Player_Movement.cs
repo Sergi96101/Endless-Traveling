@@ -126,12 +126,16 @@ public class Player_Movement : MonoBehaviour
 			if (Input.GetKeyDown(KeyCode.Space) || Input.GetMouseButtonDown(0))
 			{
 				//detctar si toca terra per no fer salts infinits
+<<<<<<< HEAD
 				if (!Isground)
 				{
 					myRigid.velocity = new Vector2(myRigid.velocity.x, myRigid.velocity.y * 0.5f);
 					jumpTimeCount = jumpTime;
 					noJump = false;
 				}
+=======
+				myRigid.velocity = new Vector2(myRigid.velocity.x, myRigid.velocity.y - force);
+>>>>>>> develop
 			}
             //planejar 
             //salt llarg
