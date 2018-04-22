@@ -8,17 +8,18 @@ public class GeneradorBackground : MonoBehaviour {
     public Transform puntGeneracio;
 
     public ObjectPooler[] poolFons;
-    private enum mapa {Prat, Planeta, Canvi};
-    private mapa cas;
+    public enum mapa {Prat, Planeta, Canvi};
+    public mapa cas;
 
     private int contMapa;
-    private
+    private int contCanvi;
 
     // Use this for initialization
     void Start () {
         anchoFondo = poolFons[1].pooledObject.GetComponent<SpriteRenderer>().size.x;
         cas = mapa.Prat;
         contMapa = 1;
+        contCanvi = 1;
     }
 	
 	// Update is called once per frame
@@ -47,13 +48,15 @@ public class GeneradorBackground : MonoBehaviour {
                     {
                         newFons = poolFons[2].GetPooledObject();
                         contMapa = 0;
+                        ++contCanvi;
                         break;
                     }
             }
 
-            if (contMapa == 0)
+            if (contMapa == 0 && contCanvi == 3)
             {
                 cas = (mapa)Random.Range(0, 2);
+                contCanvi = 0;
             }
 
             transform.position = new Vector3(transform.position.x + anchoFondo / 2, transform.position.y, transform.position.z);
