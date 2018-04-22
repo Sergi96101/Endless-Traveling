@@ -21,8 +21,13 @@ public class StageManager : MonoBehaviour {
         {
             genP.cas = GeneradorPlataformes.mapa.Planeta;
         }
+        else if (genB.cas == GeneradorBackground.mapa.Jetpack)
+        {
+            genP.cas = GeneradorPlataformes.mapa.Jetpack;
+        }
         else
         {
+            genP.gameObject.SetActive(true);
             genP.cas = GeneradorPlataformes.mapa.Canvi;
         }
 	}

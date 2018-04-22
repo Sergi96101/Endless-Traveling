@@ -8,7 +8,7 @@ public class GeneradorBackground : MonoBehaviour {
     public Transform puntGeneracio;
 
     public ObjectPooler[] poolFons;
-    public enum mapa {Prat, Planeta, Canvi};
+    public enum mapa {Prat, Planeta, Jetpack, Canvi};
     public mapa cas;
 
     private int contMapa;
@@ -26,36 +26,42 @@ public class GeneradorBackground : MonoBehaviour {
 	void Update () {
         if (transform.position.x < puntGeneracio.position.x)
         {
-            if (contMapa == 30)
+            if (contMapa == 5)
             {
                 cas = mapa.Canvi;
             }
             switch (cas)
             {
                 case mapa.Prat:
-                    {
-                        newFons = poolFons[0].GetPooledObject();
-                        ++contMapa;
-                        break;
-                    }
+                {
+                    newFons = poolFons[0].GetPooledObject();
+                    ++contMapa;
+                    break;
+                }
                 case mapa.Planeta:
-                    {
-                        newFons = poolFons[1].GetPooledObject();
-                        ++contMapa;
-                        break;
-                    }
+                {
+                    newFons = poolFons[1].GetPooledObject();
+                    ++contMapa;
+                    break;
+                }
+                case mapa.Jetpack:
+                {
+                    newFons = poolFons[2].GetPooledObject();
+                    ++contMapa;
+                    break;
+                }
                 case mapa.Canvi:
-                    {
-                        newFons = poolFons[2].GetPooledObject();
-                        contMapa = 0;
-                        ++contCanvi;
-                        break;
-                    }
+                {
+                    newFons = poolFons[3].GetPooledObject();
+                    contMapa = 0;
+                    ++contCanvi;
+                    break;
+                }
             }
 
             if (contMapa == 0 && contCanvi == 3)
             {
-                cas = (mapa)Random.Range(0, 2);
+                cas = (mapa)Random.Range(0, 3);
                 contCanvi = 0;
             }
 

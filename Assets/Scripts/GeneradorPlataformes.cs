@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class GeneradorPlataformes : MonoBehaviour {
 
-    public enum mapa {Prat, Planeta, Canvi};
+    public enum mapa {Prat, Planeta, Jetpack, Canvi};
     const int numPlataformes = 4;
     public mapa cas;
 
@@ -64,7 +64,7 @@ public class GeneradorPlataformes : MonoBehaviour {
 
             switch (cas) 
             {
-                case mapa.Prat: 
+                case mapa.Prat:
                 {
                     newPlatform = poolPlataformesPrat[selectorPlataforma].GetPooledObject();
                     break;
@@ -72,6 +72,10 @@ public class GeneradorPlataformes : MonoBehaviour {
                 case mapa.Planeta:
                 {
                     newPlatform = poolPlataformesPlaneta[selectorPlataforma].GetPooledObject();
+                    break;
+                }
+                case mapa.Jetpack:
+                {
                     break;
                 }
                 case mapa.Canvi:
