@@ -6,6 +6,7 @@ public class GeneradorBackground : MonoBehaviour {
     private float anchoFondo;
     private GameObject newFons;
     public Transform puntGeneracio;
+    public GameObject triggerCanviSalt;
 
     public ObjectPooler[] poolFons;
     public enum mapa {Prat, Planeta, Jetpack, Canvi};
@@ -52,6 +53,11 @@ public class GeneradorBackground : MonoBehaviour {
                 }
                 case mapa.Canvi:
                 {
+                    if (contCanvi == 1)
+                    {
+                        triggerCanviSalt = Instantiate(triggerCanviSalt);
+                        triggerCanviSalt.transform.position = transform.position;
+                    }
                     newFons = poolFons[3].GetPooledObject();
                     contMapa = 0;
                     ++contCanvi;
