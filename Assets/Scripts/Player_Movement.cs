@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Player_Movement : MonoBehaviour
 {
@@ -10,14 +11,16 @@ public class Player_Movement : MonoBehaviour
     //velocitat i força de salt del pers.
     public float speed;
     public float force;
-    public float jetpackForce = 75.0f;
+    public float jetpackForce;
     //variables per a determinar el temps de salt del personatge i mantindre clic
+	private bool noJump;
     public float jumpTime;
     private float jumpTimeCount;
     //variables per augmentar la velocitat del player segons distancia
     public float speedIncrease;
     public float speedDist;
     private float speedDistCount;
+
 
     //boolea per tocar terra
     public bool Isground;
@@ -40,6 +43,8 @@ public class Player_Movement : MonoBehaviour
         myAnim = GetComponent<Animator>();
 
         speedDistCount = speedIncrease;
+
+		noJump = true;
     }
 
     // Update is called once per frame
@@ -85,20 +90,22 @@ public class Player_Movement : MonoBehaviour
                 {
                     myRigid.velocity = new Vector2(myRigid.velocity.x, force);
                     jumpTimeCount = jumpTime;
+					noJump = false;
                 }
             }
-            if ((Input.GetKey(KeyCode.Space) || Input.GetMouseButton(0)))
-            {
+			if ((Input.GetKey(KeyCode.Space) || Input.GetMouseButton(0)) && !noJump)
+			{
                 //detctar si toca terra per no fer salts infinits
                 if (jumpTimeCount > 0 && !Isground)
                 {
                     myRigid.velocity = new Vector2(myRigid.velocity.x, force);
                     jumpTimeCount -= Time.deltaTime;
                 }
-            }
+			}
             if ((Input.GetKeyUp(KeyCode.Space) || Input.GetMouseButtonUp(0)))
             {
                 jumpTimeCount = 0;
+				noJump = true;
             }
         }
         //MECANICA SALT MAPA 2
@@ -136,5 +143,11 @@ public class Player_Movement : MonoBehaviour
         myAnim.SetFloat("Speed", myRigid.velocity.x);
         myAnim.SetBool("Is_Ground", Isground);
     }
+
+	void OnCollisionEnter2D (Collision2D other){
+		if (other.gameObject.tag == "killPlayer") {
+			Application.LoadLevel (Application.loadedLevel);
+		}
+	}
 
 }
