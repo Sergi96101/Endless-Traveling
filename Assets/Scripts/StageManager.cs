@@ -49,6 +49,7 @@ public class StageManager : MonoBehaviour {
 			{
 				myPlayer.bouncingActive = false;
 				myPlayer.jetpackActive = true;
+
 			}
 			myPlayer.changeM = false;
 		}

@@ -28,7 +28,7 @@ public class Player_Movement : MonoBehaviour
     public float sizeDetection;
     //escollir l'objecte amb el que colisiona
     //public Collider2D myColl;
-    private Rigidbody2D myRigid;
+	private Rigidbody2D myRigid;
 
     private Animator myAnim;
 
@@ -123,18 +123,15 @@ public class Player_Movement : MonoBehaviour
         }
         else if (bouncingActive)
         {
-			if ((Input.GetKey(KeyCode.Space) || Input.GetMouseButton(0)))
+			if (Input.GetKeyDown(KeyCode.Space) || Input.GetMouseButtonDown(0))
 			{
 				//detctar si toca terra per no fer salts infinits
-				if (jumpTimeCount > 0 && !Isground)
+				if (!Isground)
 				{
-					myRigid.velocity = new Vector2(myRigid.velocity.x, force);
-					jumpTimeCount -= Time.deltaTime;
+					myRigid.velocity = new Vector2(myRigid.velocity.x, myRigid.velocity.y * 0.5f);
+					jumpTimeCount = jumpTime;
+					noJump = false;
 				}
-			}
-			if ((Input.GetKeyUp(KeyCode.Space) || Input.GetMouseButtonUp(0)))
-			{
-				jumpTimeCount = 0;
 			}
             //planejar 
             //salt llarg
