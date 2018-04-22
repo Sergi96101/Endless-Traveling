@@ -56,7 +56,7 @@ public class GeneradorBackground : MonoBehaviour {
                     if (contCanvi == 2)
                     {
                         triggerCanviSalt = Instantiate(triggerCanviSalt);
-						triggerCanviSalt.transform.position = new Vector3 (transform.position.x + anchoFondo, transform.position.y, transform.position.z);
+						triggerCanviSalt.transform.position = transform.position;
                     }
                     newFons = poolFons[3].GetPooledObject();
                     contMapa = 0;
