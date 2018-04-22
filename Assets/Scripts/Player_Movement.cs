@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Player_Movement : MonoBehaviour
 {
@@ -11,7 +12,6 @@ public class Player_Movement : MonoBehaviour
     public float speed;
     public float force;
     public float jetpackForce;
-	public float mySpeed;
     //variables per a determinar el temps de salt del personatge i mantindre clic
 	private bool noJump;
     public float jumpTime;
@@ -20,7 +20,6 @@ public class Player_Movement : MonoBehaviour
     public float speedIncrease;
     public float speedDist;
     private float speedDistCount;
-	private float mySpeedDistCount;
 
 
     //boolea per tocar terra
@@ -34,8 +33,6 @@ public class Player_Movement : MonoBehaviour
 
     private Animator myAnim;
 
-	public GameMaster myMaster;
-
     // Use this for initialization
     void Start()
     {
@@ -48,9 +45,6 @@ public class Player_Movement : MonoBehaviour
         speedDistCount = speedIncrease;
 
 		noJump = true;
-
-		mySpeed = speed;
-		mySpeedDistCount = speedDistCount;
     }
 
     // Update is called once per frame
@@ -152,9 +146,7 @@ public class Player_Movement : MonoBehaviour
 
 	void OnCollisionEnter2D (Collision2D other){
 		if (other.gameObject.tag == "killPlayer") {
-			myMaster.RestartGame ();
-			speed = mySpeed;
-			speedDistCount = mySpeedDistCount;
+			Application.LoadLevel (Application.loadedLevel);
 		}
 	}
 

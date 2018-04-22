@@ -12,8 +12,6 @@ public class ScoreController : MonoBehaviour {
 
 	public float countPoints;
 
-	public bool scoreUp;
-
 	// Use this for initialization
 	void Start () {
 		
@@ -22,9 +20,7 @@ public class ScoreController : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		
-		if(scoreUp){
 		scoreCount += countPoints * Time.deltaTime;
-		}
 
 		if (scoreCount > highScoreCount) {
 			highScoreCount = scoreCount;
