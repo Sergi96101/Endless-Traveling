@@ -4,16 +4,17 @@ using UnityEngine;
 
 public class GeneradorPlataformes : MonoBehaviour {
 
-    private enum mapa { Prat, Planeta };
+    public enum mapa {Prat, Planeta, Canvi};
     const int numPlataformes = 4;
-    private mapa cas;
+    public mapa cas;
 
-    public GameObject[] plataformesGenerades;
     public Transform puntGeneracio;
     public float distanciaEntrePlataformesMin;
     public float distanciaEntrePlataformesMax;
+
     public ObjectPooler[] poolPlataformesPrat;
     public ObjectPooler[] poolPlataformesPlaneta;
+    public ObjectPooler[] poolPlataformesCanvi;
 
     private GameObject newPlatform;
     
@@ -26,6 +27,8 @@ public class GeneradorPlataformes : MonoBehaviour {
     private float maxHeight;
     public float maxHeightChange;
     private float heightChange;
+
+    private int contMapa;
 
     // Use this for initialization
     void Start () {
@@ -59,8 +62,6 @@ public class GeneradorPlataformes : MonoBehaviour {
                 heightChange = minHeight;
             }
 
-            cas = (mapa)Random.Range(0,2);
-
             switch (cas) 
             {
                 case mapa.Prat: 
@@ -71,6 +72,11 @@ public class GeneradorPlataformes : MonoBehaviour {
                 case mapa.Planeta:
                 {
                     newPlatform = poolPlataformesPlaneta[selectorPlataforma].GetPooledObject();
+                    break;
+                }
+                case mapa.Canvi:
+                {
+                    newPlatform = poolPlataformesCanvi[selectorPlataforma].GetPooledObject();
                     break;
                 }
             }
