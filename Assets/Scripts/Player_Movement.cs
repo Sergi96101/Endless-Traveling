@@ -83,8 +83,9 @@ public class Player_Movement : MonoBehaviour
 
         Isground = Physics2D.OverlapCircle(checkGround.position, sizeDetection, WhichGround);
 
-        if (!jetpackActive)
+		if (!jetpackActive && !bouncingActive)
         {
+
             //salt
             if (Input.GetKeyDown(KeyCode.Space) || Input.GetMouseButtonDown(0))
             {
@@ -114,6 +115,7 @@ public class Player_Movement : MonoBehaviour
         //MECANICA SALT MAPA 2
         else if (jetpackActive)
         {
+
             if (Input.GetKey(KeyCode.Space) || Input.GetMouseButton(0))
             {
 
@@ -126,11 +128,12 @@ public class Player_Movement : MonoBehaviour
 			if (Input.GetKeyDown(KeyCode.Space) || Input.GetMouseButtonDown(0))
 			{
 				//detctar si toca terra per no fer salts infinits
-				if (!Isground)
-				{
-					myRigid.velocity = new Vector2 (myRigid.velocity.x, myRigid.velocity.y * 0.5f);
-				}
+				myRigid.gravityScale *= 0.5f;
 
+			}
+			if ((Input.GetKeyUp(KeyCode.Space) || Input.GetMouseButtonUp(0)))
+			{
+				myRigid.gravityScale /= 0.5f;
 			}
             //planejar 
             //salt llarg
