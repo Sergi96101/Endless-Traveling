@@ -4,19 +4,15 @@ using UnityEngine;
 
 public class GeneradorPlataformes : MonoBehaviour {
 
-    public enum mapa {Prat, Planeta, Jetpack, Canvi};
     const int numPlataformes = 4;
-    public mapa cas;
 
     public Transform puntGeneracio;
     public float distanciaEntrePlataformesMin;
     public float distanciaEntrePlataformesMax;
 
-    public ObjectPooler[] poolPlataformesPrat;
-    public ObjectPooler[] poolPlataformesPlaneta;
-    public ObjectPooler[] poolPlataformesCanvi;
+    public ObjectPooler[] poolPlataformesBasic;
 
-    private GameObject newPlatform;
+    public GameObject newPlatform;
     
     private float[] anchurasPlataformas;
     private float distanciaEntrePlataformes;
@@ -28,15 +24,13 @@ public class GeneradorPlataformes : MonoBehaviour {
     public float maxHeightChange;
     private float heightChange;
 
-    private int contMapa;
-
     // Use this for initialization
     void Start () {
         anchurasPlataformas = new float[numPlataformes];
 
         for (int i = 0; i < numPlataformes; ++i)
         {
-            anchurasPlataformas[i] = poolPlataformesPrat[i].pooledObject.GetComponent<BoxCollider2D>().size.x;
+            anchurasPlataformas[i] = poolPlataformesBasic[i].pooledObject.GetComponent<BoxCollider2D>().size.x;
         }
 
         minHeight = transform.position.y;
@@ -62,28 +56,6 @@ public class GeneradorPlataformes : MonoBehaviour {
                 heightChange = minHeight;
             }
 
-            switch (cas) 
-            {
-                case mapa.Prat:
-                {
-                    newPlatform = poolPlataformesPrat[selectorPlataforma].GetPooledObject();
-                    break;
-                }
-                case mapa.Planeta:
-                {
-                    newPlatform = poolPlataformesPlaneta[selectorPlataforma].GetPooledObject();
-                    break;
-                }
-                case mapa.Jetpack:
-                {
-                    break;
-                }
-                case mapa.Canvi:
-                {
-                    newPlatform = poolPlataformesCanvi[selectorPlataforma].GetPooledObject();
-                    break;
-                }
-            }
 
             transform.position = new Vector3(transform.position.x + (anchurasPlataformas[selectorPlataforma] / 2) + distanciaEntrePlataformes, heightChange, transform.position.z);
 

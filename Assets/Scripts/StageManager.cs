@@ -4,43 +4,71 @@ using UnityEngine;
 
 public class StageManager : MonoBehaviour {
 
+    private int selectorPlataforma;
+    private int contZone;
+
+    public ObjectPooler[] poolFons;
+    public ObjectPooler[] poolPlatformsBasic;
+    public ObjectPooler[] poolPlatformsBounce;
+
+    public enum mapa {Basic, Bounce, Jetpack, Change};
+    public mapa cas;
+
     public GeneradorPlataformes genP;
     public GeneradorBackground genB;
 
 	public Player_Movement myPlayer;
 
+    public GameObject changeZone;
+
 	// Use this for initialization
 	void Start () {
+        cas = mapa.Basic;
+        contZone = 1;
 	}
 	
 	// Update is called once per frame
 	void Update () {
-	        if (genB.cas == GeneradorBackground.mapa.Prat)
-	        {
-	            genP.cas = GeneradorPlataformes.mapa.Prat;
-	        }
-	        else if (genB.cas == GeneradorBackground.mapa.Planeta)
-	        {
-	            genP.cas = GeneradorPlataformes.mapa.Planeta;
-	        }
-	        else if (genB.cas == GeneradorBackground.mapa.Jetpack)
-	        {
-	            genP.cas = GeneradorPlataformes.mapa.Jetpack;
-	        }
-	        else
-	        {
-	            genP.gameObject.SetActive(true);
-	            genP.cas = GeneradorPlataformes.mapa.Canvi;
+        Debug.Log(cas);
+        switch (cas) {
+            
+            case mapa.Basic:
+                {
+                    genB.newFons = getBackground((int)cas);
+                    genP.newPlatform = getPlatform((int)cas);
+                    ++contZone;
+                    break;
+                }
+            case mapa.Bounce:
+                {
+                    genB.newFons = getBackground((int)cas);
+                    genP.newPlatform = getPlatform((int)cas);
+                    ++contZone;
+                    break;
+                }
+            case mapa.Jetpack:
+                {
+                    genB.newFons = getBackground((int)cas);
+                    ++contZone;
+                    break;
+                }
+            case mapa.Change:
+                {
+                    changeZone = Instantiate(changeZone);
+                    contZone = 1;
+                    break;
+                }
+        }
+        Debug.Log(contZone);
+        cas = setZone((int)cas, contZone);
 
-			}
-
-		if (myPlayer.changeM == true) {
-			if (genB.cas == GeneradorBackground.mapa.Prat)
+		/*if (myPlayer.changeM == true) {
+			if (genB.cas == GeneradorBackground.mapa.Basic)
 			{
 				myPlayer.bouncingActive = false;
 				myPlayer.jetpackActive = false;
 			}
-			else if (genB.cas == GeneradorBackground.mapa.Planeta)
+			else if (genB.cas == GeneradorBackground.mapa.Rebot)
 			{
 				myPlayer.jetpackActive = false;
 				myPlayer.bouncingActive = true;
@@ -52,6 +80,40 @@ public class StageManager : MonoBehaviour {
 
 			}
 			myPlayer.changeM = false;
-		}
+		}*/
 	}
+    GameObject getBackground(int backgroundType)
+    {
+        return poolFons[backgroundType].GetPooledObject();
+    }
+
+    GameObject getPlatform(int platformType)
+    {
+        int platformSelector = Random.Range(0, 4);
+        if (platformType == 1)
+        {
+            return poolPlatformsBasic[platformSelector].GetPooledObject();
+        }
+        else
+        {
+            return poolPlatformsBounce[platformSelector].GetPooledObject();
+        }
+    }
+
+    mapa setZone(int zoneType, int contZone)
+    {
+
+        if (contZone == 5)
+        {
+            return mapa.Change;
+        }
+        else if (contZone == 1)
+        {
+            return (mapa)Random.Range(0, 3);
+        }
+        else
+        {
+            return (mapa)zoneType;
+        }
+    }
 }
