@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class StageManager : MonoBehaviour {
+    public Transform puntGeneracio;
 
     private int selectorPlataforma;
     private int contZone;
@@ -26,63 +27,62 @@ public class StageManager : MonoBehaviour {
         cas = mapa.Basic;
         contZone = 1;
 	}
-	
-	// Update is called once per frame
-	void Update () {
 
-        Debug.Log(cas);
-        switch (cas) {
-            
-            case mapa.Basic:
+    // Update is called once per frame
+    void Update() {
+        if (transform.position.x < puntGeneracio.position.x)
+        {
+            switch (cas) {
+                case mapa.Basic:
+                    {
+                        genB.newFons = getBackground((int)cas);
+                        genP.newPlatform = getPlatform((int)cas);
+                        ++contZone;
+                        break;
+                    }
+                case mapa.Bounce:
+                    {
+                        genB.newFons = getBackground((int)cas);
+                        genP.newPlatform = getPlatform((int)cas);
+                        ++contZone;
+                        break;
+                    }
+                case mapa.Jetpack:
+                    {
+                        genB.newFons = getBackground((int)cas);
+                        ++contZone;
+                        break;
+                    }
+                case mapa.Change:
+                    {
+                        changeZone = Instantiate(changeZone);
+                        contZone = 1;
+                        break;
+                    }
+            }
+            cas = setZone((int)cas, contZone);
+
+            /*if (myPlayer.changeM == true) {
+                if (genB.cas == GeneradorBackground.mapa.Basic)
                 {
-                    genB.newFons = getBackground((int)cas);
-                    genP.newPlatform = getPlatform((int)cas);
-                    ++contZone;
-                    break;
+                    myPlayer.bouncingActive = false;
+                    myPlayer.jetpackActive = false;
                 }
-            case mapa.Bounce:
+                else if (genB.cas == GeneradorBackground.mapa.Rebot)
                 {
-                    genB.newFons = getBackground((int)cas);
-                    genP.newPlatform = getPlatform((int)cas);
-                    ++contZone;
-                    break;
+                    myPlayer.jetpackActive = false;
+                    myPlayer.bouncingActive = true;
                 }
-            case mapa.Jetpack:
+                else if (genB.cas == GeneradorBackground.mapa.Jetpack)
                 {
-                    genB.newFons = getBackground((int)cas);
-                    ++contZone;
-                    break;
+                    myPlayer.bouncingActive = false;
+                    myPlayer.jetpackActive = true;
+
                 }
-            case mapa.Change:
-                {
-                    changeZone = Instantiate(changeZone);
-                    contZone = 1;
-                    break;
-                }
+                myPlayer.changeM = false;
+            }*/
         }
-        Debug.Log(contZone);
-        cas = setZone((int)cas, contZone);
-
-		/*if (myPlayer.changeM == true) {
-			if (genB.cas == GeneradorBackground.mapa.Basic)
-			{
-				myPlayer.bouncingActive = false;
-				myPlayer.jetpackActive = false;
-			}
-			else if (genB.cas == GeneradorBackground.mapa.Rebot)
-			{
-				myPlayer.jetpackActive = false;
-				myPlayer.bouncingActive = true;
-			}
-			else if (genB.cas == GeneradorBackground.mapa.Jetpack)
-			{
-				myPlayer.bouncingActive = false;
-				myPlayer.jetpackActive = true;
-
-			}
-			myPlayer.changeM = false;
-		}*/
-	}
+    }
     GameObject getBackground(int backgroundType)
     {
         return poolFons[backgroundType].GetPooledObject();

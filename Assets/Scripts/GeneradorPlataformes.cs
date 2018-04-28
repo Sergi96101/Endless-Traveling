@@ -39,31 +39,27 @@ public class GeneradorPlataformes : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if(transform.position.x < puntGeneracio.position.x)
+        distanciaEntrePlataformes = Random.Range(distanciaEntrePlataformesMin, distanciaEntrePlataformesMax);
+
+        selectorPlataforma = Random.Range(0, 4);
+
+        heightChange = transform.position.y + Random.Range(maxHeightChange, -maxHeightChange);
+
+        if (heightChange > maxHeight)
         {
-            distanciaEntrePlataformes = Random.Range(distanciaEntrePlataformesMin, distanciaEntrePlataformesMax);
-
-            selectorPlataforma = Random.Range(0, 4);
-
-            heightChange = transform.position.y + Random.Range(maxHeightChange, -maxHeightChange);
-
-            if (heightChange > maxHeight)
-            {
-                heightChange = maxHeight;
-            }
-            else if (heightChange < minHeight)
-            {
-                heightChange = minHeight;
-            }
-
-
-            transform.position = new Vector3(transform.position.x + (anchurasPlataformas[selectorPlataforma] / 2) + distanciaEntrePlataformes, heightChange, transform.position.z);
-
-            newPlatform.transform.position = transform.position;
-            newPlatform.transform.rotation = transform.rotation;
-            newPlatform.SetActive(true);
-
-            transform.position = new Vector3(transform.position.x + (anchurasPlataformas[selectorPlataforma] / 2), transform.position.y, transform.position.z);
+            heightChange = maxHeight;
         }
+        else if (heightChange < minHeight)
+        {
+            heightChange = minHeight;
+        }
+
+        transform.position = new Vector3(transform.position.x + (anchurasPlataformas[selectorPlataforma] / 2) + distanciaEntrePlataformes, heightChange, transform.position.z);
+
+        newPlatform.transform.position = transform.position;
+        newPlatform.transform.rotation = transform.rotation;
+        newPlatform.SetActive(true);
+
+        transform.position = new Vector3(transform.position.x + (anchurasPlataformas[selectorPlataforma] / 2), transform.position.y, transform.position.z);
     }
 }

@@ -17,17 +17,13 @@ public class GeneradorBackground : MonoBehaviour {
     }
 	
 	// Update is called once per frame
-	void Update () {
-        if (transform.position.x < puntGeneracio.position.x)
-        {
+	void Update () { 
+        transform.position = new Vector3(transform.position.x + anchoFondo / 2, transform.position.y, transform.position.z);
 
-            transform.position = new Vector3(transform.position.x + anchoFondo / 2, transform.position.y, transform.position.z);
+        newFons.transform.position = transform.position;
+        newFons.transform.rotation = transform.rotation;
+        newFons.SetActive(true);
 
-            newFons.transform.position = transform.position;
-            newFons.transform.rotation = transform.rotation;
-            newFons.SetActive(true);
-
-            transform.position = new Vector3(transform.position.x + anchoFondo / 2, transform.position.y, transform.position.z);
-        }
+        transform.position = new Vector3(transform.position.x + anchoFondo / 2, transform.position.y, transform.position.z);
     }
 }
