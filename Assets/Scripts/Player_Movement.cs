@@ -11,6 +11,8 @@ public class Player_Movement : MonoBehaviour
     public float speed;
     public float force;
     public float jetpackForce;
+
+    public float forceJmp;
     //variables per a determinar el temps de salt del personatge i mantindre clic
 	private bool noJump;
     public float jumpTime;
@@ -20,7 +22,11 @@ public class Player_Movement : MonoBehaviour
     public float speedDist;
     private float speedDistCount;
 
-
+	//boolea per detectar input
+	private bool jmpPress;
+    //boolea per detectar release de input
+    private bool jmpReleased;
+    
     //boolea per tocar terra
     public bool Isground;
     public LayerMask WhichGround;//escollir el layer amb el que colisiona
@@ -48,6 +54,8 @@ public class Player_Movement : MonoBehaviour
 		noJump = true;
 
 		changeM = false;
+
+        jmpPress = false;
     }
 
     // Update is called once per frame
@@ -62,9 +70,17 @@ public class Player_Movement : MonoBehaviour
         //velocitat en x i y noves
         //corre cap a la dreta sol
         myRigid.velocity = new Vector2(speed, myRigid.velocity.y);
+
+        //si es prem espai o clic esquerre del ratolí posa el boolea a true, altrament false
+        if (Input.GetKeyDown(KeyCode.Space) || Input.GetMouseButtonDown(0))
+            jmpPress = true;
+        else jmpPress = false;
+        //si es deixa de premer espai o clic esquerre del ratolí posa el boolea a true, altrament false
+        if (Input.GetKeyUp(KeyCode.Space) || Input.GetMouseButtonUp(0)) jmpReleased = true;
+        else jmpReleased = false;
     }
 
-    private void FixedUpdate()
+    void FixedUpdate()
     {
         //MECANICA SALT MAPA 1
         //boolea ground = quan toca el layer que hem escollit
@@ -80,14 +96,12 @@ public class Player_Movement : MonoBehaviour
             jetpackActive = false;
         }
 
-
         Isground = Physics2D.OverlapCircle(checkGround.position, sizeDetection, WhichGround);
 
-		if (!jetpackActive && !bouncingActive)
+        if (!jetpackActive && !bouncingActive)
         {
-
             //salt
-            if (Input.GetKeyDown(KeyCode.Space) || Input.GetMouseButtonDown(0))
+            if (jmpPress == true)
             {
                 //detctar si toca terra per no fer salts infinits
                 if (Isground)
@@ -106,7 +120,7 @@ public class Player_Movement : MonoBehaviour
                     jumpTimeCount -= Time.deltaTime;
                 }
 			}
-            if ((Input.GetKeyUp(KeyCode.Space) || Input.GetMouseButtonUp(0)))
+            if (jmpReleased == true)
             {
                 jumpTimeCount = 0;
 				noJump = true;
@@ -116,7 +130,7 @@ public class Player_Movement : MonoBehaviour
         else if (jetpackActive)
         {
 
-            if (Input.GetKey(KeyCode.Space) || Input.GetMouseButton(0))
+            if (jmpPress == true)
             {
 
                 myRigid.velocity = new Vector2(myRigid.velocity.x, jetpackForce);
@@ -125,15 +139,15 @@ public class Player_Movement : MonoBehaviour
         }
         else if (bouncingActive)
         {
-			if (Input.GetKeyDown(KeyCode.Space) || Input.GetMouseButtonDown(0))
+			if (jmpPress == true)
 			{
 				//detctar si toca terra per no fer salts infinits
-				myRigid.gravityScale *= 0.5f;
+				myRigid.gravityScale *= forceJmp;
 
 			}
-			if ((Input.GetKeyUp(KeyCode.Space) || Input.GetMouseButtonUp(0)))
+			if (jmpReleased == true)
 			{
-				myRigid.gravityScale /= 0.5f;
+				myRigid.gravityScale /= forceJmp;
 			}
             //planejar 
             //salt llarg
