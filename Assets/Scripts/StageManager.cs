@@ -9,6 +9,7 @@ public class StageManager : MonoBehaviour {
 
 	public Player_Movement myPlayer;
 
+
 	// Use this for initialization
 	void Start () {
 	}

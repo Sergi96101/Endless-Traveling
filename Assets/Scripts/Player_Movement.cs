@@ -9,6 +9,7 @@ public class Player_Movement : MonoBehaviour
     public bool jetpackActive;
     //velocitat i força de salt del pers.
     public float speed;
+    private float speedStore;
     public float force;
     public float jetpackForce;
 
@@ -19,8 +20,10 @@ public class Player_Movement : MonoBehaviour
     private float jumpTimeCount;
     //variables per augmentar la velocitat del player segons distancia
     public float speedIncrease;
+    public float speedIncreaseStore;
     public float speedDist;
     private float speedDistCount;
+    private float speedDistCountStore;
 
 	//boolea per detectar input
 	private bool jmpPress;
@@ -38,13 +41,15 @@ public class Player_Movement : MonoBehaviour
 
     private Animator myAnim;
 
+    public GameManager myManager;
+
 	public bool changeM;
 
     // Use this for initialization
     void Start()
     {
         myRigid = GetComponent<Rigidbody2D>();
-        //myColl = GetComponent<Collider2D>();
+
         jumpTimeCount = jumpTime;
 
         myAnim = GetComponent<Animator>();
@@ -56,6 +61,10 @@ public class Player_Movement : MonoBehaviour
 		changeM = false;
 
         jmpPress = false;
+
+        speedStore = speed;
+        speedDistCountStore = speedDistCount;
+        speedIncreaseStore = speedIncrease;
     }
 
     // Update is called once per frame
@@ -159,8 +168,12 @@ public class Player_Movement : MonoBehaviour
 
 	void OnCollisionEnter2D (Collision2D other){
 		if (other.gameObject.tag == "killPlayer") {
-			Application.LoadLevel (Application.loadedLevel);
-		}
+
+            myManager.RestartGame();
+            speed = speedStore;
+            speedDistCount = speedDistCountStore;
+            speedIncrease = speedIncreaseStore;
+        }
 	}
 
 	void OnTriggerEnter2D (Collider2D other){
