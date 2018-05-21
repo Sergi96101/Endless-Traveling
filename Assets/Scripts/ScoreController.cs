@@ -18,7 +18,10 @@ public class ScoreController : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-
+        if (PlayerPrefs.HasKey("HighScore"))
+        {
+            highScoreCount = PlayerPrefs.GetFloat("HighScore");
+        }
 	}
 	
 	// Update is called once per frame
@@ -27,8 +30,10 @@ public class ScoreController : MonoBehaviour {
         {
             scoreCount += countPoints * Time.deltaTime;
         }
+        else scoreCount = 0;
 		if (scoreCount > highScoreCount) {
 			highScoreCount = scoreCount;
+            PlayerPrefs.SetFloat("HighScore", highScoreCount);
 		}
 
         scoreText.text = "Score: " + (int)scoreCount;

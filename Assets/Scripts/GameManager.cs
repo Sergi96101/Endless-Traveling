@@ -15,11 +15,15 @@ public class GameManager : MonoBehaviour {
 
     private DestructorElements[] listPlatform;
 
+    private ScoreController myStoreController;
+
     // Use this for initialization
     void Start() {
         platStartPoint = platformGenerator.position;
         playerStartPoint = myPlayer.transform.position;
         bgStartPoint = backgroundGenerator.position;
+
+        myStoreController = FindObjectOfType<ScoreController>();
     }
 
     // Update is called once per frame
@@ -34,6 +38,7 @@ public class GameManager : MonoBehaviour {
 
     public IEnumerator RestartGame_CoRoutine()
     {
+        myStoreController.increaseScore = false;
         myPlayer.gameObject.SetActive(false);
         yield return new WaitForSeconds(0.5f);
         listPlatform = FindObjectsOfType<DestructorElements>();
@@ -46,5 +51,6 @@ public class GameManager : MonoBehaviour {
         backgroundGenerator.position = bgStartPoint;
         platformGenerator.position = platStartPoint;
         myPlayer.gameObject.SetActive(true);
+        myStoreController.increaseScore = true;
     } 
 }
