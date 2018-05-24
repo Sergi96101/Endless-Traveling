@@ -41,4 +41,8 @@ public class ScoreController : MonoBehaviour {
 
 	}
 
+    public void CoinPicked(int scoreAdded)
+    {
+        scoreCount += scoreAdded;
+    }
 }
