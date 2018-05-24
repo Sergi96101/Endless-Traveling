@@ -26,7 +26,8 @@ public class Player_Movement : MonoBehaviour
 	private bool jmpPress;
     //boolea per detectar release de input
     private bool jmpReleased;
-    
+
+    public bool canPlane;
     //boolea per tocar terra
     public bool Isground;
     public LayerMask WhichGround;//escollir el layer amb el que colisiona
@@ -56,6 +57,8 @@ public class Player_Movement : MonoBehaviour
 		changeM = false;
 
         jmpPress = false;
+
+        canPlane = false;
     }
 
     // Update is called once per frame
@@ -100,6 +103,8 @@ public class Player_Movement : MonoBehaviour
 
         if (!jetpackActive && !bouncingActive)
         {
+            canPlane = false;
+            myRigid.gravityScale = 2;
             //salt
             if (jmpPress == true)
             {
@@ -129,6 +134,8 @@ public class Player_Movement : MonoBehaviour
         //MECANICA SALT MAPA 2
         else if (jetpackActive)
         {
+            canPlane = false;
+            myRigid.gravityScale = 2;
 
             if (jmpPress == true)
             {
@@ -139,18 +146,25 @@ public class Player_Movement : MonoBehaviour
         }
         else if (bouncingActive)
         {
-			if (jmpPress == true)
-			{
-				//detctar si toca terra per no fer salts infinits
-				myRigid.gravityScale *= forceJmp;
+            if (Isground)
+            {
+                canPlane = true;
+            }
+            if (canPlane == true)
+            {
+                if (jmpPress == true)
+                {
+                    //detctar si toca terra per no fer salts infinits
+                    myRigid.gravityScale *= 0.25f;
 
-			}
-			if (jmpReleased == true)
-			{
-				myRigid.gravityScale /= forceJmp;
-			}
-            //planejar 
-            //salt llarg
+
+                }
+                else if (jmpReleased == true)
+                {
+                    myRigid.gravityScale = 2;
+                    canPlane = false;
+                }
+            }
         }
 
         myAnim.SetFloat("Speed", myRigid.velocity.x);
