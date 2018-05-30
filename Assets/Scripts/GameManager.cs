@@ -14,6 +14,7 @@ public class GameManager : MonoBehaviour {
     private Vector3 playerStartPoint;
 
     private DestructorElements[] listPlatform;
+    private DestructorElements[] listBackground;
 
     private ScoreController myStoreController;
 
@@ -42,9 +43,12 @@ public class GameManager : MonoBehaviour {
         myPlayer.gameObject.SetActive(false);
         yield return new WaitForSeconds(0.5f);
         listPlatform = FindObjectsOfType<DestructorElements>();
+        listBackground = FindObjectsOfType<DestructorElements>();
+
         for (int i = 0; i < listPlatform.Length; i++)
         {
             listPlatform[i].gameObject.SetActive(false);
+            listBackground[i].gameObject.SetActive(false);
         }
 
         myPlayer.transform.position = playerStartPoint;
