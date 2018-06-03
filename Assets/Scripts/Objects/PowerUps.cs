@@ -16,14 +16,17 @@ public class PowerUps : MonoBehaviour {
         powerUpManager = FindObjectOfType<ManagerPowerUps>();
 	}
 
-    void SetPowerUp()
+    void Awake()
     {
         int selectPowerUp = Random.Range(0,2);
 
         switch (selectPowerUp)
         {
-            case 0:  doublePoints = true; break;
-            case 1:  slowMode = true; break;
+            case 0:  doublePoints = true;
+                break;
+            case 1:  slowMode = true;
+                break;
+            
         }
         GetComponent<SpriteRenderer>().sprite = powerUpSprite[selectPowerUp];
     }

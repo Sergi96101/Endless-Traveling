@@ -35,9 +35,9 @@ public class GeneradorPlataformes : MonoBehaviour {
     private int contMapa;
 
     public float powerUpHeight;
-
     public ObjectPooler powerUpPool;
-    public float powerUpTresh;    
+    public float powerUpTresh;   
+     
     // Use this for initialization
     void Start () {
         anchurasPlataformas = new float[numPlataformes];

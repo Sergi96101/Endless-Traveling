@@ -1,15 +1,14 @@
 fileFormatVersion: 2
-guid: 7eebab8b8d0ea214aa3264f5d3fec348
-timeCreated: 1521375847
+guid: 1140e0e13effd3447a45dce4c5273152
+timeCreated: 1528017735
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
-    21300000: spritesheet_players_0
-    21300002: spritesheet_players_1
-    21300004: spritesheet_players_2
-    21300006: spritesheet_players_3
-    21300008: spritesheet_players_4
-  externalObjects: {}
+    21300000: PowerUp1
+    21300002: PowerUp1
+    21300004: spritesheet_items_0
+    21300006: PowerUp2
+    21300008: spritesheet_items_1
   serializedVersion: 4
   mipmaps:
     mipMapMode: 0
@@ -18,8 +17,6 @@ TextureImporter:
     linearTexture: 0
     fadeOut: 0
     borderMipMap: 0
-    mipMapsPreserveCoverage: 0
-    alphaTestReferenceValue: 0.5
     mipMapFadeDistanceStart: 1
     mipMapFadeDistanceEnd: 3
   bumpmap:
@@ -35,13 +32,10 @@ TextureImporter:
   textureFormat: 1
   maxTextureSize: 2048
   textureSettings:
-    serializedVersion: 2
     filterMode: 0
     aniso: -1
     mipBias: -1
-    wrapU: 1
-    wrapV: 1
-    wrapW: 1
+    wrapMode: 1
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
@@ -63,7 +57,6 @@ TextureImporter:
   platformSettings:
   - buildTarget: DefaultTexturePlatform
     maxTextureSize: 2048
-    resizeAlgorithm: 0
     textureFormat: -1
     textureCompression: 1
     compressionQuality: 50
@@ -72,7 +65,14 @@ TextureImporter:
     overridden: 0
   - buildTarget: Standalone
     maxTextureSize: 2048
-    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+  - buildTarget: Android
+    maxTextureSize: 2048
     textureFormat: -1
     textureCompression: 1
     compressionQuality: 50
@@ -83,77 +83,45 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: spritesheet_players_0
+      name: PowerUp1
       rect:
         serializedVersion: 2
-        x: 696
-        y: 1500
-        width: 35
-        height: 178
+        x: 541
+        y: 40
+        width: 70
+        height: 48
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-      physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: spritesheet_players_1
+      name: spritesheet_items_0
       rect:
         serializedVersion: 2
-        x: 267
-        y: 1279
-        width: 104
-        height: 136
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
+        x: 672
+        y: 32
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-      physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: spritesheet_players_2
+      name: PowerUp2
       rect:
         serializedVersion: 2
-        x: 136
-        y: 1024
-        width: 112
-        height: 140
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
+        x: 417
+        y: 291
+        width: 62
+        height: 58
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-      physicsShape: []
-      tessellationDetail: 0
-    - serializedVersion: 2
-      name: spritesheet_players_3
-      rect:
-        serializedVersion: 2
-        x: 138
-        y: 768
-        width: 107
-        height: 136
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-    - serializedVersion: 2
-      name: spritesheet_players_4
-      rect:
-        serializedVersion: 2
-        x: 137
-        y: 256
-        width: 110
-        height: 139
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
       tessellationDetail: 0
     outline: []
-    physicsShape: []
   spritePackingTag: 
   userData: 
   assetBundleName: 
