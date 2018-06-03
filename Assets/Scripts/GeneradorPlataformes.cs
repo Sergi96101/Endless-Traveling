@@ -34,6 +34,10 @@ public class GeneradorPlataformes : MonoBehaviour {
 
     private int contMapa;
 
+    public float powerUpHeight;
+
+    public ObjectPooler powerUpPool;
+    public float powerUpTresh;    
     // Use this for initialization
     void Start () {
         anchurasPlataformas = new float[numPlataformes];
@@ -91,6 +95,14 @@ public class GeneradorPlataformes : MonoBehaviour {
                 }
             }
 
+            if (Random.Range(0f, 100f) < powerUpTresh)
+            {
+                GameObject newPowerup = powerUpPool.GetPooledObject();
+                newPowerup.transform.position = transform.position + new Vector3(distanciaEntrePlataformes / 2, Random.Range(powerUpHeight / 2, powerUpHeight), 0f);
+
+                newPowerup.SetActive(true);
+            }
+
             transform.position = new Vector3(transform.position.x + (anchurasPlataformas[selectorPlataforma] / 2) + distanciaEntrePlataformes, heightChange, transform.position.z);
 
             newPlatform.transform.position = transform.position;
@@ -100,7 +112,7 @@ public class GeneradorPlataformes : MonoBehaviour {
             if (Random.Range(0f, 100f) < randomCoinTresh) {
                 myCoinGenerator.GenerateCoins(new Vector3(transform.position.x, transform.position.y + 1.5f, transform.position.z));
             }
-           
+
 
             transform.position = new Vector3(transform.position.x + (anchurasPlataformas[selectorPlataforma] / 2), transform.position.y, transform.position.z);
         }

@@ -41,8 +41,6 @@ public class Player_Movement : MonoBehaviour
 
     private Animator myAnim;
 
-    public GameManager myManager;
-
 	public bool changeM;
 
     // Use this for initialization
@@ -169,10 +167,7 @@ public class Player_Movement : MonoBehaviour
 	void OnCollisionEnter2D (Collision2D other){
 		if (other.gameObject.tag == "killPlayer") {
 
-            myManager.RestartGame();
-            speed = speedStore;
-            speedDistCount = speedDistCountStore;
-            speedIncrease = speedIncreaseStore;
+            SceneManager.LoadScene(1);
         }
 	}
 

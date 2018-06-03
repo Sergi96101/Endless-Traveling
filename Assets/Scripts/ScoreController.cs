@@ -26,23 +26,29 @@ public class ScoreController : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+
         if (increaseScore)
         {
             scoreCount += countPoints * Time.deltaTime;
         }
-        else scoreCount = 0;
+
 		if (scoreCount > highScoreCount) {
 			highScoreCount = scoreCount;
             PlayerPrefs.SetFloat("HighScore", highScoreCount);
 		}
 
         scoreText.text = "Score: " + (int)scoreCount;
-		highScoreText.text = "High Score : " + (int)highScoreCount; 
+		highScoreText.text = "High Score : " + Mathf.Round(highScoreCount); 
 
 	}
 
     public void CoinPicked(int scoreAdded)
     {
+
+        if (doublePoints)
+        {
+            scoreAdded = scoreAdded * 2;
+        }
         scoreCount += scoreAdded;
     }
 }
