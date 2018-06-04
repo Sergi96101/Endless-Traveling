@@ -90,7 +90,9 @@ public class GeneradorPlataformes : MonoBehaviour {
                 }
                 case mapa.Canvi:
                 {
-                    newPlatform = poolPlataformesCanvi[selectorPlataforma].GetPooledObject();
+                    newPlatform = poolPlataformesCanvi[0].GetPooledObject();
+                    heightChange = 0;
+                    distanciaEntrePlataformes = 0;
                     break;
                 }
             }
