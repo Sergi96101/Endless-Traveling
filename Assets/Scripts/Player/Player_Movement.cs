@@ -41,6 +41,8 @@ public class Player_Movement : MonoBehaviour
 
     private Animator myAnim;
 
+    public AudioSource jump;
+    public AudioSource Death;
 	public bool changeM;
 
     // Use this for initialization
@@ -116,6 +118,7 @@ public class Player_Movement : MonoBehaviour
                     myRigid.velocity = new Vector2(myRigid.velocity.x, force);
                     jumpTimeCount = jumpTime;
 					noJump = false;
+                    jump.Play(); 
                 }
             }
 			if ((Input.GetKey(KeyCode.Space) || Input.GetMouseButton(0)) && !noJump)
@@ -166,8 +169,9 @@ public class Player_Movement : MonoBehaviour
 
 	void OnCollisionEnter2D (Collision2D other){
 		if (other.gameObject.tag == "killPlayer") {
-
+            
             SceneManager.LoadScene(1);
+            Death.Play();
         }
 	}
 
