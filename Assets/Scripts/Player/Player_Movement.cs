@@ -63,13 +63,11 @@ public class Player_Movement : MonoBehaviour
 
         jmpPress = false;
 
-<<<<<<< HEAD:Assets/Scripts/Player/Player_Movement.cs
         speedStore = speed;
         speedDistCountStore = speedDistCount;
         speedIncreaseStore = speedIncrease;
-=======
+
         canPlane = false;
->>>>>>> develop:Assets/Scripts/Player_Movement.cs
     }
 
     // Update is called once per frame
