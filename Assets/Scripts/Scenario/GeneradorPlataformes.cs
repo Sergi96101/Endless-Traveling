@@ -82,6 +82,7 @@ public class GeneradorPlataformes : MonoBehaviour {
                 case mapa.Planeta:
                 {
                     newPlatform = poolPlataformesPlaneta[selectorPlataforma].GetPooledObject();
+                    heightChange = -4;
                     break;
                 }
                 case mapa.Jetpack:
@@ -91,7 +92,7 @@ public class GeneradorPlataformes : MonoBehaviour {
                 case mapa.Canvi:
                 {
                     newPlatform = poolPlataformesCanvi[0].GetPooledObject();
-                    heightChange = 0;
+                    heightChange = -2;
                     distanciaEntrePlataformes = 0;
                     break;
                 }
